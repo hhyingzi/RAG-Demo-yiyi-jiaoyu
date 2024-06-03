@@ -12,7 +12,7 @@ from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.vector_stores.milvus import MilvusVectorStore
 from llama_index.core.node_parser import SentenceWindowNodeParser
 
-load_dotenv(".env.example")
+load_dotenv("./ingestion-service/.env.example")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
@@ -51,7 +51,7 @@ def generate_datasource():
             original_text_metadata_key="original_text",
         )
 
-        documents = SimpleDirectoryReader("data").load_data()
+        documents = SimpleDirectoryReader("./ingestion-service/data").load_data()
         nodes = node_parser.get_nodes_from_documents(documents)
         index = VectorStoreIndex(nodes, storage_context=storage_context, embed_model=embed_model)
 

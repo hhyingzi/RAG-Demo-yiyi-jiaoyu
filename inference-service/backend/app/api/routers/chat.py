@@ -1,5 +1,6 @@
-from typing import List
+import os
 
+from typing import List
 from fastapi import APIRouter, HTTPException, status
 from llama_index.core.llms import MessageRole
 from pydantic import BaseModel
@@ -29,7 +30,11 @@ async def chat(data: _ChatData):
             detail="最后一个消息必须来自用户",
         )
 
-    config = RailsConfig.from_path("./app/config")
+    # 从指定的路径加载guardrails配置。
+    # config = RailsConfig.from_path("./app/config")
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.join(current_dir, "../../config")
+    config = RailsConfig.from_path(config_path)
     rails = LLMRails(config)
 
     prompt1 = "请用中文回答以下问题：问题：" 
