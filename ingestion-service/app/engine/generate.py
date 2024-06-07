@@ -1,6 +1,7 @@
 # generate.py：这个文件会在目录中生成 PDF 文档的嵌入，并将它们保存在 Milvus 集合中。
 import logging, os
 import pymilvus
+import openai
 from dotenv import load_dotenv
 from llama_index.core import (
     SimpleDirectoryReader,
@@ -16,6 +17,9 @@ load_dotenv("./ingestion-service/.env.example")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
+
+openai.api_base = os.getenv("OPENAI_API_BASE")
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 model = os.getenv("MODEL", "gpt-3.5-turbo")
 llm=OpenAI(model=model)
