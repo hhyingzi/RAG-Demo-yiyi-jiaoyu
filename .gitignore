@@ -2,3 +2,6 @@
 venv/
 inference-service/frontend/node_modules/
 .idea
+
+# 所有配置文件
+.env*
