@@ -3,6 +3,10 @@ import hashlib  # PBKDF2算法根据口令生成密钥
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad  # 使用标准PKCS#7填充法，进行边界填充与移除填充。
 
+# 加载环境
+from dotenv import load_dotenv
+load_dotenv()
+
 root_dir = os.path.dirname(__file__)
 encrypted_dir = os.path.join(root_dir, 'encrypted_config_files')
 # 明文文件，密文文件
@@ -81,7 +85,9 @@ def _cipher(do_encrypt:bool, plain_file:str, encrypted_file:str, password:str):
                 f_out.write(unpadded_chunk)
 
 
-# 生成 requirements.txt: `$ pipreqs .`
+def openai_gpt35_infer_test():
+    pass
+
 
 if __name__ == '__main__':
     # do_encrypt()
